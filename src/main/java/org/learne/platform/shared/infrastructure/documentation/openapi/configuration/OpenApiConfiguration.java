@@ -26,23 +26,6 @@ public class OpenApiConfiguration {
                 .externalDocs(new ExternalDocumentation()
                         .description("LearnE Platform wiki Documentation")
                         .url("https://learne-platform.wiki.github.io/docs"));
-
-        // Add security scheme
-
-        final String securitySchemeName = "bearerAuth";
-
-        openApi.addSecurityItem(new SecurityRequirement()
-                        .addList(securitySchemeName))
-                .components(new Components()
-                        .addSecuritySchemes(securitySchemeName,
-                                new SecurityScheme()
-                                        .name(securitySchemeName)
-                                        .type(SecurityScheme.Type.HTTP)
-                                        .scheme("bearer")
-                                        .bearerFormat("JWT")));
-
-        // Return OpenAPI configuration object with all the settings
-
         return openApi;
     }
 }
