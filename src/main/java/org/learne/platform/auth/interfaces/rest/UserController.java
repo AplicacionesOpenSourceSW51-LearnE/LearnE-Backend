@@ -1,5 +1,8 @@
 package org.learne.platform.auth.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.learne.platform.auth.domain.model.aggregates.User;
 import org.learne.platform.auth.domain.model.queries.GetAllUsersQuery;
@@ -19,7 +22,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/users", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Users", description = "Operations related to retrieving user information for various purposes")
-
 public class UserController {
     private final UserQueryService userQueryService;
 
@@ -27,6 +29,14 @@ public class UserController {
         this.userQueryService = userQueryService;
     }
 
+    @Operation(
+            summary = "Search for all users",
+            description = "Searches for all created users on the platform"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "All Users found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+    })
     @GetMapping
     private ResponseEntity<List<UserResource>> getAllUsers() {
         var getAllUsers = new GetAllUsersQuery();
@@ -36,6 +46,14 @@ public class UserController {
         return ResponseEntity.ok(userResources);
     }
 
+    @Operation(
+            summary = "Search for a specific user",
+            description = "Searches for a specific user using their username"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+    })
     @GetMapping("{username}")
     public ResponseEntity<UserResource> getUserByUsername(@PathVariable("username") String username) {
         Optional<User> user = userQueryService.handle(new GetUserByUsernameQuery(username));
