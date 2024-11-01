@@ -1,8 +1,6 @@
 package org.learne.platform.auth.interfaces.rest.transform;
 
 import org.learne.platform.auth.domain.model.aggregates.User;
-import org.learne.platform.auth.domain.model.valueobjects.Memberships;
-import org.learne.platform.auth.domain.model.valueobjects.UserTypes;
 import org.learne.platform.auth.interfaces.rest.resources.UserResource;
 
 public class UserResourceFromEntityAssembler {

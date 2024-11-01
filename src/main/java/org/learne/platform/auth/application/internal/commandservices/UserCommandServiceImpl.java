@@ -2,6 +2,7 @@ package org.learne.platform.auth.application.internal.commandservices;
 
 import org.learne.platform.auth.domain.model.aggregates.User;
 import org.learne.platform.auth.domain.model.commands.CreateUserCommand;
+import org.learne.platform.auth.domain.model.commands.SignInCommand;
 import org.learne.platform.auth.domain.services.UserCommandService;
 import org.learne.platform.auth.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,15 @@ public class UserCommandServiceImpl implements UserCommandService {
         var user = new User(command);
         var createUser = userRepository.save(user);
         return Optional.of(createUser);
+    }
+
+    @Override
+    public Optional<User> handle(SignInCommand command){
+        var user = userRepository.findByUsername(command.username());
+        if (user.isEmpty())
+            throw new RuntimeException("Profile not found");
+        if (!command.password().matches(user.get().getPassword()))
+            throw new RuntimeException("Invalid password");
+        return user;
     }
 }
