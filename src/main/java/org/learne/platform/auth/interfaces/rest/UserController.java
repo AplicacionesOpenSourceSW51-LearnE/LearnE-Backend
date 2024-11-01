@@ -37,7 +37,7 @@ public class UserController {
             @ApiResponse(responseCode = "201", description = "All Users found"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
-    @GetMapping
+    @GetMapping("/getAllUsers")
     private ResponseEntity<List<UserResource>> getAllUsers() {
         var getAllUsers = new GetAllUsersQuery();
         var users = userQueryService.handle(getAllUsers);
@@ -54,7 +54,7 @@ public class UserController {
             @ApiResponse(responseCode = "201", description = "User found"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
-    @GetMapping("{username}")
+    @GetMapping("/getUserByUsername/{username}")
     public ResponseEntity<UserResource> getUserByUsername(@PathVariable("username") String username) {
         Optional<User> user = userQueryService.handle(new GetUserByUsernameQuery(username));
         return user.map(source -> ResponseEntity.ok(UserResourceFromEntityAssembler.toResourceFromEntity(source)))

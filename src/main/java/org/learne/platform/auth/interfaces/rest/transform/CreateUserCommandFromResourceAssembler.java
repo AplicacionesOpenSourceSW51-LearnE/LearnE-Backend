@@ -10,6 +10,6 @@ public class CreateUserCommandFromResourceAssembler {
     public static CreateUserCommand toCommand(CreateUserResource resource) {
         var membership = Memberships.valueOf(resource.membership());
         var userType = UserTypes.valueOf(resource.userType());
-        return new CreateUserCommand(resource.firstName(), resource.firstName(), resource.email(), resource.username(), resource.password(), userType, membership);
+        return new CreateUserCommand(resource.firstName(), resource.lastName(), resource.email(), resource.username(), resource.password(), userType, membership);
     }
 }
