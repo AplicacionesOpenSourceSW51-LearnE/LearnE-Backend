@@ -49,7 +49,7 @@ public class Course extends AuditableAbstractAggregateRoot<Course> {
     private String principal_image;
 
 
-    public Course() {
+    protected Course() {
         this.title = Strings.EMPTY;
         this.description = Strings.EMPTY;
         this.level = Strings.EMPTY;

@@ -2,7 +2,7 @@ package org.learne.platform.learne.application.internal.queryservices;
 
 import org.learne.platform.learne.domain.model.aggregates.Course;
 import org.learne.platform.learne.domain.model.queries.GetAllCoursesQuery;
-import org.learne.platform.learne.domain.model.queries.GetCourseByIdQuery;
+import org.learne.platform.learne.domain.model.queries.GetCourseByTitleQuery;
 import org.learne.platform.learne.domain.model.queries.GetLearnePathItemByCourseIdAndTeacherIdQuery;
 import org.learne.platform.learne.domain.services.CourseQueryService;
 import org.learne.platform.learne.infrastructure.persistence.jpa.CourseRepository;
@@ -25,8 +25,8 @@ public class CourseQueryServiceImpl implements CourseQueryService {
     }
 
     @Override
-    public Optional<Course> handle(GetCourseByIdQuery query) {
-        return courseRepository.findCourseBy(query.courseId());
+    public Optional<Course> handle(GetCourseByTitleQuery query) {
+        return courseRepository.findCourseBy(query.title());
     }
 
     @Override
