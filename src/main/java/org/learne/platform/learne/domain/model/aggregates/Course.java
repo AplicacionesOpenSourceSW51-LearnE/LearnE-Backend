@@ -1,12 +1,10 @@
 package org.learne.platform.learne.domain.model.aggregates;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
 import org.learne.platform.learne.domain.model.commands.CreatedCourseCommand;
-import org.learne.platform.learne.domain.model.valueobjects.LearnePath;
 import org.learne.platform.learne.domain.model.valueobjects.TeacherId;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
