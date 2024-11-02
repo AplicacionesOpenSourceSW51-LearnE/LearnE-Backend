@@ -1,7 +1,10 @@
 package org.learne.platform.learne.domain.model.aggregates;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
 import org.learne.platform.learne.domain.model.commands.CreatedCourseCommand;
@@ -13,13 +16,36 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 public class Course extends AuditableAbstractAggregateRoot<Course> {
+    @Column
+    @Size(min = 3, max = 50)
     private Long id;
+
+    @Column
+    @Size(min = 3, max = 50)
     private String title;
+
+    @Column
+    @Size(min = 3, max = 50)
     private String description;
+
+    @Column
+    @Size(min = 3, max = 50)
     private TeacherId teacherId;
+
+    @Column
+    @Size(min = 3, max = 50)
     private String level;
+
+    @Column
+    @Size(min = 3, max = 50)
     private String duration;
+
+    @Column
+    @Size(min = 3, max = 50)
     private String prior_knowledge;
+
+    @Column
+    @Size(min = 3, max = 50)
     private String principal_image;
 
 
