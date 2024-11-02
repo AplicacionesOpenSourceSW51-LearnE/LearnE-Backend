@@ -10,16 +10,16 @@ import org.learne.platform.learne.domain.model.queries.GetCourseByTitleQuery;
 import org.learne.platform.learne.domain.services.CourseCommandService;
 import org.learne.platform.learne.domain.services.CourseQueryService;
 import org.learne.platform.learne.interfaces.rest.resources.CourseResource;
+import org.learne.platform.learne.interfaces.rest.resources.CreateCourseResource;
 import org.learne.platform.learne.interfaces.rest.transform.CourseResourceFromEntityAssembler;
+import org.learne.platform.learne.interfaces.rest.transform.CreateCourseCommandFromResourceAssembler;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -27,9 +27,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Tag(name="Courses", description = "Various operations for managing courses towards the user..")
 public class CourseController {
     private final CourseQueryService courseQueryService;
+    private final CourseCommandService courseCommandService;
 
     public CourseController(CourseQueryService courseQueryService, CourseCommandService courseCommandService) {
         this.courseQueryService = courseQueryService;
+        this.courseCommandService = courseCommandService;
     }
 
     @Operation(
@@ -63,4 +65,21 @@ public class CourseController {
         return course.map(source -> ResponseEntity.ok(CourseResourceFromEntityAssembler.toResourceFromEntity(source)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @Operation(
+            summary = "Create a course",
+            description = "Create a course using the parameters provided by the endpoint"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Course created"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+    })
+    @PostMapping("/createCourse")
+    public ResponseEntity<CourseResource> createCourse(@RequestBody CreateCourseResource resource){
+        Optional<Course> course = courseCommandService
+                .handle(CreateCourseCommandFromResourceAssembler.toCommand(resource));
+        return course.map(source -> new ResponseEntity<>(CourseResourceFromEntityAssembler.toResourceFromEntity(source), CREATED))
+                .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
 }
