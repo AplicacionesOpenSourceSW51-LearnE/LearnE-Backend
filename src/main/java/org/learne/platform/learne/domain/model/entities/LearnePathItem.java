@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import org.learne.platform.learne.domain.model.aggregates.Course;
 import org.learne.platform.learne.domain.model.valueobjects.TeacherId;
-import org.learne.platform.shared.domain.model.entities.AudiTableModel;
+import org.learne.platform.shared.domain.model.entities.AuditableModel;
 
 /**
  * Learning path item entity
@@ -16,7 +16,7 @@ import org.learne.platform.shared.domain.model.entities.AudiTableModel;
  */
 @Entity
 @Getter
-public class LearnePathItem extends AudiTableModel {
+public class LearnePathItem extends AuditableModel {
     @ManyToOne
     @JoinColumn(name = "course_id")
     @NotNull
