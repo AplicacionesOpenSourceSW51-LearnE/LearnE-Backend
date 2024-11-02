@@ -2,13 +2,11 @@ package org.learne.platform.learne.domain.model.commands;
 
 import org.learne.platform.learne.domain.model.valueobjects.TeacherId;
 
-public record CreatedCourseCommand(Long Id, String title, String description,
+public record CreatedCourseCommand(String title, String description,
                                    TeacherId teacherId, String duration, String prior_knowledge, String principal_image, String level,
                                    org.learne.platform.learne.domain.model.valueobjects.StatusCourse status) {
     public CreatedCourseCommand {
-        if (Id == null) {
-            throw new IllegalArgumentException("Id cannot be null");
-        }
+
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Title cannot be blank");
         }

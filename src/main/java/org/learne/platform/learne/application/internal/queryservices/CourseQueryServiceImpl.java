@@ -26,7 +26,7 @@ public class CourseQueryServiceImpl implements CourseQueryService {
 
     @Override
     public Optional<Course> handle(GetCourseByTitleQuery query) {
-        return courseRepository.findCourseBy(query.title());
+        return courseRepository.findByTitle(query.title());
     }
 
     @Override

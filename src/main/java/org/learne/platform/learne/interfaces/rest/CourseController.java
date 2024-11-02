@@ -1,4 +1,4 @@
-package org.learne.platform.learne.interfaces.rest.transform;
+package org.learne.platform.learne.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -10,6 +10,7 @@ import org.learne.platform.learne.domain.model.queries.GetCourseByTitleQuery;
 import org.learne.platform.learne.domain.services.CourseCommandService;
 import org.learne.platform.learne.domain.services.CourseQueryService;
 import org.learne.platform.learne.interfaces.rest.resources.CourseResource;
+import org.learne.platform.learne.interfaces.rest.transform.CourseResourceFromEntityAssembler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

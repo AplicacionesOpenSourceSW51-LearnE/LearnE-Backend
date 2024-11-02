@@ -19,7 +19,7 @@ public class CourseCommandServiceImpl implements CourseCommandService {
 
     @Override
     public Optional<Course> handle(CreatedCourseCommand command) {
-        if (courseRepository.existsCourseBy(command.title()))
+        if (courseRepository.existsByTitle(command.title()))
             throw new IllegalArgumentException("Title already exists.");
         var course = new Course(command);
         var createCourse = courseRepository.save(course);

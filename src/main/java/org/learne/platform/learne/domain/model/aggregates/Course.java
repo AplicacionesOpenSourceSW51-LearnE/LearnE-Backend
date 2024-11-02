@@ -18,10 +18,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Course extends AuditableAbstractAggregateRoot<Course> {
     @Column
     @Size(min = 3, max = 50)
-    private Long id;
-
-    @Column
-    @Size(min = 3, max = 50)
     private String title;
 
     @Column
@@ -49,17 +45,9 @@ public class Course extends AuditableAbstractAggregateRoot<Course> {
     private String principal_image;
 
 
-    protected Course() {
-        this.title = Strings.EMPTY;
-        this.description = Strings.EMPTY;
-        this.level = Strings.EMPTY;
-        this.duration = Strings.EMPTY;
-        this.prior_knowledge = Strings.EMPTY;
-        this.principal_image = Strings.EMPTY;
-    }
+    protected Course() {}
 
     public Course(CreatedCourseCommand command) {
-        this.id = command.Id();
         this.title = command.title();
         this.description = command.description();
         this.teacherId = command.teacherId();
@@ -68,6 +56,4 @@ public class Course extends AuditableAbstractAggregateRoot<Course> {
         this.prior_knowledge = command.prior_knowledge();
         this.principal_image = command.principal_image();
     }
-
-
 }
