@@ -1,4 +1,4 @@
-package org.learne.platform.learne.interfaces.rest.resources;
+package org.learne.platform.learne.interfaces.rest.resources.Course;
 
 import org.learne.platform.learne.domain.model.valueobjects.TeacherId;
 

@@ -7,12 +7,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.learne.platform.learne.domain.model.aggregates.Course;
 import org.learne.platform.learne.domain.model.queries.GetAllCoursesQuery;
 import org.learne.platform.learne.domain.model.queries.GetCourseByTitleQuery;
-import org.learne.platform.learne.domain.services.CourseCommandService;
-import org.learne.platform.learne.domain.services.CourseQueryService;
-import org.learne.platform.learne.interfaces.rest.resources.CourseResource;
-import org.learne.platform.learne.interfaces.rest.resources.CreateCourseResource;
-import org.learne.platform.learne.interfaces.rest.transform.CourseResourceFromEntityAssembler;
-import org.learne.platform.learne.interfaces.rest.transform.CreateCourseCommandFromResourceAssembler;
+import org.learne.platform.learne.domain.services.Course.CourseCommandService;
+import org.learne.platform.learne.domain.services.Course.CourseQueryService;
+import org.learne.platform.learne.interfaces.rest.resources.Course.CourseResource;
+import org.learne.platform.learne.interfaces.rest.resources.Course.CreateCourseResource;
+import org.learne.platform.learne.interfaces.rest.transform.Course.CourseResourceFromEntityAssembler;
+import org.learne.platform.learne.interfaces.rest.transform.Course.CreateCourseCommandFromResourceAssembler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

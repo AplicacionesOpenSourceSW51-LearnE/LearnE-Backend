@@ -1,8 +1,8 @@
-package org.learne.platform.learne.interfaces.rest.transform;
+package org.learne.platform.learne.interfaces.rest.transform.Course;
 
 import org.learne.platform.learne.domain.model.commands.CreatedCourseCommand;
 import org.learne.platform.learne.domain.model.valueobjects.StatusCourse;
-import org.learne.platform.learne.interfaces.rest.resources.CreateCourseResource;
+import org.learne.platform.learne.interfaces.rest.resources.Course.CreateCourseResource;
 
 public class CreateCourseCommandFromResourceAssembler {
 
