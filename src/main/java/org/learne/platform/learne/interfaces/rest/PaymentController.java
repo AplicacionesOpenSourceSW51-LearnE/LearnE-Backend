@@ -1,5 +1,8 @@
 package org.learne.platform.learne.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.learne.platform.learne.domain.model.queries.GetPaymentByStudentIdQuery;
 import org.learne.platform.learne.domain.services.Payment.PaymentCommandService;
@@ -25,7 +28,15 @@ public class PaymentController {
         this.paymentQueryService = paymentQueryService;
     }
 
-    @PostMapping
+    @Operation(
+            summary = "Saves a Payment Method",
+            description = "Saves a Payment Method for a certain User identified by their studentId"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Payment Method Saved for User"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+    })
+    @PostMapping("/savePaymentMethod")
     public ResponseEntity<PaymentResource> createPayment(@RequestBody CreatePaymentResource resource) {
         var createPaymentCommand = CreatePaymentCommandFromResourceAssembler.toCommandFromResource(resource);
         var payment = paymentCommandService.handle(createPaymentCommand);
@@ -37,8 +48,15 @@ public class PaymentController {
         return new ResponseEntity<>(paymentResource, HttpStatus.CREATED);
     }
 
-
-    @GetMapping("/{studentId}")
+    @Operation(
+            summary = "Retrieve a User Payment Method Information",
+            description = "Retrieves a User Payment Method Information using their studentId"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Payment Method Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+    })
+    @GetMapping("/getPaymentByStudentId/{studentId}")
     public ResponseEntity<PaymentResource> getPaymentByStudentId(@PathVariable Long studentId) {
         var payment = paymentQueryService.handle(new GetPaymentByStudentIdQuery(studentId));
         if (payment.isEmpty()) {
@@ -48,8 +66,4 @@ public class PaymentController {
         var paymentResource = PaymentResourceFromEntityAssembler.toResourceFromEntity(paymentEntity);
         return ResponseEntity.ok(paymentResource);
     }
-
-
-
-
 }
