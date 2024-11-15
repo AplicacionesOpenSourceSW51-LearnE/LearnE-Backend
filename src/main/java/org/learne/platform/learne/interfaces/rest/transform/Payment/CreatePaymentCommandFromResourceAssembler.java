@@ -1,7 +1,7 @@
-package org.learne.platform.learne.interfaces.rest.transform;
+package org.learne.platform.learne.interfaces.rest.transform.Payment;
 
 import org.learne.platform.learne.domain.model.commands.CreatePaymentCommand;
-import org.learne.platform.learne.interfaces.rest.resources.CreatePaymentResource;
+import org.learne.platform.learne.interfaces.rest.resources.Payment.CreatePaymentResource;
 
 public class CreatePaymentCommandFromResourceAssembler {
     public static CreatePaymentCommand toCommandFromResource(CreatePaymentResource resource) {

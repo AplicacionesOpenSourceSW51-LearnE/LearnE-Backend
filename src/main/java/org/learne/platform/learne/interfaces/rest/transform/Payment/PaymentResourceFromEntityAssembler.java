@@ -1,7 +1,7 @@
-package org.learne.platform.learne.interfaces.rest.transform;
+package org.learne.platform.learne.interfaces.rest.transform.Payment;
 
 import org.learne.platform.learne.domain.model.aggregates.Payment;
-import org.learne.platform.learne.interfaces.rest.resources.PaymentResource;
+import org.learne.platform.learne.interfaces.rest.resources.Payment.PaymentResource;
 
 public class PaymentResourceFromEntityAssembler {
 

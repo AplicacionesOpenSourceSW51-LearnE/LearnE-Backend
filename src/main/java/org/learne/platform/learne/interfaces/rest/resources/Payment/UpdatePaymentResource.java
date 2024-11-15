@@ -1,7 +1,7 @@
-package org.learne.platform.learne.interfaces.rest.resources;
+package org.learne.platform.learne.interfaces.rest.resources.Payment;
 
-public record CreatePaymentResource(String studentId, String nameCard, String numberCard, String expireDate, String securityCode, String emailAddress) {
-    public CreatePaymentResource {
+public record UpdatePaymentResource(String studentId, String nameCard, String numberCard, String expireDate, String securityCode, String emailAddress) {
+    public UpdatePaymentResource {
         if (studentId == null || studentId.isBlank()) {
             throw new IllegalArgumentException("studentId cannot be blank");
         }
@@ -21,5 +21,4 @@ public record CreatePaymentResource(String studentId, String nameCard, String nu
             throw new IllegalArgumentException("emailAddress cannot be blank");
         }
     }
-
 }

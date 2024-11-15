@@ -33,16 +33,15 @@ public class Payment extends AuditableAbstractAggregateRoot<Payment> {
 
     public Payment() {}
 
-    public Payment(String studentId, String nameCard, String numberCard, String expireDate, String securityCode, String emailAddress) {
-        this.studentId = Long.parseLong(studentId);
+    public Payment updateInformation(Long studentId, String nameCard, Long numberCard, String expireDate, Integer securityCode, String emailAddress) {
+        this.studentId = studentId;
         this.nameCard = nameCard;
-        this.numberCard = Long.parseLong(numberCard);
+        this.numberCard = numberCard;
         this.expireDate = expireDate;
-        this.securityCode = Integer.parseInt(securityCode);
+        this.securityCode = securityCode;
         this.emailAddress = new EmailAddress(emailAddress);
+        return this;
     }
-
-    public String email(){ return emailAddress.email(); }
 
     public Payment(CreatePaymentCommand command) {
         this.studentId = command.studentId();

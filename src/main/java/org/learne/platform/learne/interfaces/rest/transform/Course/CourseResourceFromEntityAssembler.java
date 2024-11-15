@@ -1,7 +1,7 @@
-package org.learne.platform.learne.interfaces.rest.transform;
+package org.learne.platform.learne.interfaces.rest.transform.Course;
 
 import org.learne.platform.learne.domain.model.aggregates.Course;
-import org.learne.platform.learne.interfaces.rest.resources.CourseResource;
+import org.learne.platform.learne.interfaces.rest.resources.Course.CourseResource;
 
 public class CourseResourceFromEntityAssembler {
     public static CourseResource toResourceFromEntity(Course entity) {
