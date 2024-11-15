@@ -1,4 +1,4 @@
-package org.learne.platform.learne.domain.services;
+package org.learne.platform.learne.domain.services.Course;
 
 import org.learne.platform.learne.domain.model.aggregates.Course;
 import org.learne.platform.learne.domain.model.queries.GetAllCoursesQuery;

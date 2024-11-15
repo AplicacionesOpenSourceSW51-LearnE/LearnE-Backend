@@ -2,7 +2,7 @@ package org.learne.platform.learne.application.internal.commandservices;
 
 import org.learne.platform.learne.domain.model.aggregates.Course;
 import org.learne.platform.learne.domain.model.commands.CreatedCourseCommand;
-import org.learne.platform.learne.domain.services.CourseCommandService;
+import org.learne.platform.learne.domain.services.Course.CourseCommandService;
 import org.learne.platform.learne.infrastructure.persistence.jpa.CourseRepository;
 import org.springframework.stereotype.Service;
 
