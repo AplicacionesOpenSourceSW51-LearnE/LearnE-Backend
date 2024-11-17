@@ -29,4 +29,8 @@ public class AuditableAbstractAggregateRoot<T extends AbstractAggregateRoot<T>> 
     public void addDomainEvent(Object event) {
         super.registerEvent(event);
     }
+
+    protected void setId(Long id) {
+        this.id = id;
+    }
 }

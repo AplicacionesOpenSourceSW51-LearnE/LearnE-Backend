@@ -56,4 +56,8 @@ public class Course extends AuditableAbstractAggregateRoot<Course> {
         this.prior_knowledge = command.prior_knowledge();
         this.principal_image = command.principal_image();
     }
+
+    public Course(Long id) {
+        this.setId(id);
+    }
 }
