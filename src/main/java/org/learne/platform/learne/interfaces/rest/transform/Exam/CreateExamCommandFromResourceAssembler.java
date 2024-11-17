@@ -6,6 +6,6 @@ import org.learne.platform.learne.interfaces.rest.resources.Exam.CreateExamResou
 public class CreateExamCommandFromResourceAssembler {
 
     public static CreateExamCommand ToCommandFromResource(CreateExamResource resource) {
-        return new CreateExamCommand(resource.unitId(), resource.courseId(), resource.title());
+        return new CreateExamCommand(resource.unit_id(), resource.course_id(), resource.title());
     }
 }

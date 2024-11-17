@@ -31,4 +31,9 @@ public class Exam extends AuditableAbstractAggregateRoot<Exam> {
         this.course = new Course(command.courseId());
         this.title = command.title();
     }
+
+    public Exam(Long id) {
+        this.setId(id);
+    }
+
 }

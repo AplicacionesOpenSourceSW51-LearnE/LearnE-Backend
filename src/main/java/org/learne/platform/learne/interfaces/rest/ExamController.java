@@ -4,6 +4,7 @@ package org.learne.platform.learne.interfaces.rest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.learne.platform.learne.domain.model.queries.Exam.GetAllExamsQuery;
 import org.learne.platform.learne.domain.model.queries.Exam.GetExamByIdQuery;
 import org.learne.platform.learne.domain.services.Exam.ExamCommandService;
@@ -22,6 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/api/v1/exams", produces = APPLICATION_JSON_VALUE)
+@Tag(name = "Exams", description = "Exams API")
 public class ExamController {
 
     private final ExamCommandService examCommandService;
