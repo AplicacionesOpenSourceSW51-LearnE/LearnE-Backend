@@ -4,7 +4,7 @@ import org.learne.platform.auth.domain.model.aggregates.User;
 import org.learne.platform.auth.domain.model.queries.GetAllUsersQuery;
 import org.learne.platform.auth.domain.model.queries.GetUserByUsernameQuery;
 import org.learne.platform.auth.domain.services.UserQueryService;
-import org.learne.platform.auth.infrastructure.persistence.jpa.UserRepository;
+import org.learne.platform.auth.infrastructure.persistence.jpa.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

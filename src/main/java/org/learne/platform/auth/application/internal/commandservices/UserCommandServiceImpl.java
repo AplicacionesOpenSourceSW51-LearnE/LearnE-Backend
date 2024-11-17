@@ -4,7 +4,7 @@ import org.learne.platform.auth.domain.model.aggregates.User;
 import org.learne.platform.auth.domain.model.commands.CreateUserCommand;
 import org.learne.platform.auth.domain.model.commands.SignInCommand;
 import org.learne.platform.auth.domain.services.UserCommandService;
-import org.learne.platform.auth.infrastructure.persistence.jpa.UserRepository;
+import org.learne.platform.auth.infrastructure.persistence.jpa.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

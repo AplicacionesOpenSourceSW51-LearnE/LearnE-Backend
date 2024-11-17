@@ -1,10 +1,9 @@
-package org.learne.platform.auth.infrastructure.persistence.jpa;
+package org.learne.platform.auth.infrastructure.persistence.jpa.repositories;
 
 import org.learne.platform.auth.domain.model.aggregates.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
