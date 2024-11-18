@@ -1,19 +1,20 @@
 package org.learne.platform.learne.domain.model.aggregates;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.learne.platform.auth.domain.model.aggregates.User;
-import org.learne.platform.learne.domain.model.commands.CreateTutorialsCoursesCommand;
+import org.learne.platform.learne.domain.model.commands.TutorialsCourses.CreateTutorialsCoursesCommand;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
 @Entity
 @Getter
 public class TutorialsCourses extends AuditableAbstractAggregateRoot<TutorialsCourses> {
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "courses_id", nullable = false)
     private Course course;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)
     private User user;
 
@@ -26,17 +27,18 @@ public class TutorialsCourses extends AuditableAbstractAggregateRoot<TutorialsCo
     @Column
     private Boolean isReservated = false;
 
-    @Column(nullable = false)
+    @Column
     private String link;
 
     public TutorialsCourses() {}
 
-    public TutorialsCourses updateReserved(Boolean isReserved) {
+    public TutorialsCourses updateTutorialsCourse(Long course, Long user,
+                                                  String date, String hour, Boolean isReserved, String link) {
+        this.course = new Course(course);
+        this.user = new User(user);
+        this.date = date;
+        this.hour = hour;
         this.isReservated = isReserved;
-        return this;
-    }
-
-    public TutorialsCourses updateLink(String link) {
         this.link = link;
         return this;
     }
@@ -46,7 +48,6 @@ public class TutorialsCourses extends AuditableAbstractAggregateRoot<TutorialsCo
         this.user = new User(command.teacherId());
         this.date = command.date();
         this.hour = command.hour();
-        this.link = command.link();
     }
 
     public TutorialsCourses(Long id) {this.setId(id);}

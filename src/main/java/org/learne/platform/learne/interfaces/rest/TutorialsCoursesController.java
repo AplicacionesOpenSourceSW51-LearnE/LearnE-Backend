@@ -4,14 +4,17 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.learne.platform.learne.domain.model.aggregates.TutorialsCourses;
 import org.learne.platform.learne.domain.model.queries.TutorialsCourses.GetAllTutorialsCoursesQuery;
 import org.learne.platform.learne.domain.model.queries.TutorialsCourses.GetTutorialsCoursesByIdQuery;
 import org.learne.platform.learne.domain.services.TutorialsCourses.TutorialsCoursesCommandService;
 import org.learne.platform.learne.domain.services.TutorialsCourses.TutorialsCoursesQueryService;
 import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.CreateTutorialsCoursesResource;
 import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.TutorialsCoursesResource;
+import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.UpdateTutorialsCoursesResource;
 import org.learne.platform.learne.interfaces.rest.transform.TutorialsCourses.CreateTutorialsCoursesCommandFromResourceAssembler;
 import org.learne.platform.learne.interfaces.rest.transform.TutorialsCourses.TutorialsCoursesResourceFromEntityAssembler;
+import org.learne.platform.learne.interfaces.rest.transform.TutorialsCourses.UpdateTutorialsCoursesCommandFromResourceAssembler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,5 +72,23 @@ public class TutorialsCoursesController {
                 .map(TutorialsCoursesResourceFromEntityAssembler::toResourceFromEntity)
                 .toList();
         return ResponseEntity.ok(tutorialsCoursesResource);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update Tutorial Course", description = "Update tutorial course")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Tutorial Course updated"),
+            @ApiResponse(responseCode = "400", description = "Bad request")
+    })
+    public ResponseEntity<TutorialsCoursesResource> updateTutorialCourse(@PathVariable Long id,
+                                                                         @RequestBody UpdateTutorialsCoursesResource resource) {
+        var updateTutorialsCourseCommand = UpdateTutorialsCoursesCommandFromResourceAssembler.toCommandFromResource(id, resource);
+        var updateTutorialsCourse = tutorialsCoursesCommandService.handle(updateTutorialsCourseCommand);
+        if (updateTutorialsCourse.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        var updatedTutorialsCourseEntity = updateTutorialsCourse.get();
+        var updatedTutorialsCourseResource = TutorialsCoursesResourceFromEntityAssembler.toResourceFromEntity(updatedTutorialsCourseEntity);
+        return ResponseEntity.ok(updatedTutorialsCourseResource);
     }
 }

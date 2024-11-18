@@ -1,8 +1,8 @@
-package org.learne.platform.learne.domain.model.commands;
+package org.learne.platform.learne.domain.model.commands.TutorialsCourses;
 
 
 public record CreateTutorialsCoursesCommand(Long courseId, Long teacherId,
-                                            String date, String hour, Boolean isReservated,
+                                            String date, String hour, Boolean is_reservated,
                                             String link) {
     public CreateTutorialsCoursesCommand {
         if (courseId == null) {
@@ -16,12 +16,6 @@ public record CreateTutorialsCoursesCommand(Long courseId, Long teacherId,
         }
         if (hour == null) {
             throw new IllegalArgumentException("Hour is required");
-        }
-        if (isReservated == null) {
-            throw new IllegalArgumentException("IsReservated is required");
-        }
-        if (link == null) {
-            throw new IllegalArgumentException("Link is required");
         }
     }
 }

@@ -1,6 +1,6 @@
 package org.learne.platform.learne.interfaces.rest.transform.TutorialsCourses;
 
-import org.learne.platform.learne.domain.model.commands.CreateTutorialsCoursesCommand;
+import org.learne.platform.learne.domain.model.commands.TutorialsCourses.CreateTutorialsCoursesCommand;
 import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.CreateTutorialsCoursesResource;
 
 public class CreateTutorialsCoursesCommandFromResourceAssembler {
