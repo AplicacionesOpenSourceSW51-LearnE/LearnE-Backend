@@ -53,12 +53,7 @@ public class User extends AuditableAbstractAggregateRoot<User> {
         this.membership = command.membership();
     }
 
-
-
-
-
-
-
-
+    //Probando para TutorialsCourses
+    public User(Long id) {this.setId(id);}
 
 }
