@@ -1,6 +1,7 @@
 package org.learne.platform.learne.domain.model.aggregates;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import org.learne.platform.learne.domain.model.commands.CreateCourseEnrollmentCo
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+@Entity
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 public class CourseEnrollment extends AuditableAbstractAggregateRoot<CourseEnrollment> {
