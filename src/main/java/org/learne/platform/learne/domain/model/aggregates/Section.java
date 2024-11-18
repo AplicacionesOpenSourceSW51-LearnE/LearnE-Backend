@@ -15,6 +15,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Section extends AuditableAbstractAggregateRoot<Section> {
     @Column
     @Size(min = 3, max = 30)
+    private Long unit_id;
+
+    @Column
+    @Size(min = 3, max = 30)
     private String title;
 
     @Column
@@ -28,6 +32,7 @@ public class Section extends AuditableAbstractAggregateRoot<Section> {
     protected Section() {}
 
     public Section(CreateSectionCommand command) {
+        this.unit_id = command.unit_id();
         this.title = command.title();
         this.description = command.description();
         this.urlToVideo = command.urlToVideo();

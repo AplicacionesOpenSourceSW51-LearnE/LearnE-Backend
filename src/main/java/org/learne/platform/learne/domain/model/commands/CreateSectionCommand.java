@@ -1,7 +1,10 @@
 package org.learne.platform.learne.domain.model.commands;
 
-public record CreateSectionCommand(String title, String description, String urlToVideo) {
+public record CreateSectionCommand(Long unit_id, String title, String description, String urlToVideo) {
     public CreateSectionCommand {
+        if (unit_id == null) {
+            throw new IllegalArgumentException("Unit id cannot be null");
+        }
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Title cannot be blank.");
         }
