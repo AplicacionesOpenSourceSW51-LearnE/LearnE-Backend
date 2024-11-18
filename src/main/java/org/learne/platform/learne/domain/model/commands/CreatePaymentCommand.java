@@ -22,4 +22,5 @@ public record CreatePaymentCommand(Long studentId, String nameCard, Long numberC
         }
     }
 
+  
 }
