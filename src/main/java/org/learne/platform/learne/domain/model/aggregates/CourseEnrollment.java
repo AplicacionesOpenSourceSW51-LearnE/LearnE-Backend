@@ -27,4 +27,6 @@ public class CourseEnrollment extends AuditableAbstractAggregateRoot<CourseEnrol
         this.student_id = command.student_id();
         this.course_id = command.course_id();
     }
+
+    public CourseEnrollment(Long id) {this.setId(id);}
 }
