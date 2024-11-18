@@ -57,9 +57,8 @@ public class CourseEnrollmentController {
             @ApiResponse(responseCode = "400", description = "Bad request"),
     })
     @GetMapping("/getCourseEnrollmentByStudentIdAndCourseId/{student_id, course_id}")
-    public ResponseEntity<CourseEnrollmentResource> getCourseEnrollmentByStudentIdAndCourseId(@PathVariable("student_id") Long student_id, @PathVariable("course_id") Long course_id) {
-        Optional<CourseEnrollment> courseEnrollment = courseEnrollmentQueryService.handle(new GetCourseEnrollmentByStudentIdAndCourseId(student_id, course_id));
-        return courseEnrollment.map(source -> ResponseEntity.ok(CourseEnrollmentResourceFromEntityAssembler.toResourceFromEntity(source)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public boolean getCourseEnrollmentByStudentIdAndCourseId(@PathVariable("student_id") Long student_id, @PathVariable("course_id") Long course_id) {
+        boolean courseEnrollment = courseEnrollmentQueryService.handle(new GetCourseEnrollmentByStudentIdAndCourseId(student_id, course_id));
+        return courseEnrollment;
     }
 }
