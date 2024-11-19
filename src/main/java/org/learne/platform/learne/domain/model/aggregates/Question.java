@@ -25,4 +25,8 @@ public class Question extends AuditableAbstractAggregateRoot<Question> {
         this.exam = new Exam(command.examId());
         this.question = command.question();
     }
+
+    public Question(Long id) {
+        this.setId(id);
+    }
 }
