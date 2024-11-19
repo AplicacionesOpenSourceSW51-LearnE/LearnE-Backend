@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface TutorialsCoursesRepository extends JpaRepository<TutorialsCourses, Long> {
     Optional<TutorialsCourses> findById(Long id);
 
-    boolean existsByDateAndHour(String date, String hour);
+    boolean existsByCourseIdAndDateAndHour(Long courseId, String date, String hour);
 }

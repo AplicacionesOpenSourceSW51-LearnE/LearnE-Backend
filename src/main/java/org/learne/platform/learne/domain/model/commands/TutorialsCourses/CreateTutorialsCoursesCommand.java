@@ -2,13 +2,13 @@ package org.learne.platform.learne.domain.model.commands.TutorialsCourses;
 
 
 public record CreateTutorialsCoursesCommand(Long courseId, Long teacherId,
-                                            String date, String hour, Boolean is_reservated,
+                                            String date, String hour, Boolean isReservated,
                                             String link) {
     public CreateTutorialsCoursesCommand {
-        if (courseId == null) {
+        if (courseId == null || courseId <= 0) {
             throw new IllegalArgumentException("Course Id is required");
         }
-        if (teacherId == null) {
+        if (teacherId == null || teacherId <= 0) {
             throw new IllegalArgumentException("Teacher Id is required");
         }
         if (date == null) {

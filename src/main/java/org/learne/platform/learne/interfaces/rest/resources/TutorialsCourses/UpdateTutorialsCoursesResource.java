@@ -1,12 +1,12 @@
 package org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses;
 
-public record UpdateTutorialsCoursesResource(Long courseId, Long teacherId, String date, String hour,
-                                             Boolean isReservated, String link) {
+public record UpdateTutorialsCoursesResource(Long course_id, Long teacher_id, String date, String hour,
+                                             Boolean is_reservated, String link) {
     public UpdateTutorialsCoursesResource {
-        if (courseId == null || courseId <= 0L) {
+        if (course_id == null || course_id <= 0L) {
             throw new IllegalArgumentException("courseId cannot be null");
         }
-        if (teacherId == null || teacherId <= 0L) {
+        if (teacher_id == null || teacher_id <= 0L) {
             throw new IllegalArgumentException("teacherId cannot be null");
         }
         if (date == null || date.isBlank()) {
@@ -15,7 +15,7 @@ public record UpdateTutorialsCoursesResource(Long courseId, Long teacherId, Stri
         if (hour == null || hour.isBlank()) {
             throw new IllegalArgumentException("hour cannot be blank");
         }
-        if (isReservated == null || !isReservated) {
+        if (is_reservated == null || !is_reservated) {
             throw new IllegalArgumentException("isReservated cannot be null");
         }
     }

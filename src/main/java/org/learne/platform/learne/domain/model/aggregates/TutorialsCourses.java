@@ -1,6 +1,5 @@
 package org.learne.platform.learne.domain.model.aggregates;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.learne.platform.auth.domain.model.aggregates.User;

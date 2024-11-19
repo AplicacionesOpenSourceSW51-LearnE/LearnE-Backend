@@ -24,7 +24,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "api/v1/tutorials_courses", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/tutorials_courses", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Tutorials Courses", description = "Tutorials Courses API")
 public class TutorialsCoursesController {
     private final TutorialsCoursesCommandService tutorialsCoursesCommandService;

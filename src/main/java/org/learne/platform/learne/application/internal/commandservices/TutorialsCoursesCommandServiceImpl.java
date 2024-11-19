@@ -18,8 +18,8 @@ public class TutorialsCoursesCommandServiceImpl implements TutorialsCoursesComma
 
     @Override
     public Long handle(CreateTutorialsCoursesCommand command) {
-        if(tutorialsCoursesRepository.existsByDateAndHour(command.date(), command.hour())) {
-            throw new IllegalArgumentException("Tutorials Course in the date " + command.date() +
+        if(tutorialsCoursesRepository.existsByCourseIdAndDateAndHour(command.courseId(), command.date(), command.hour())) {
+            throw new IllegalArgumentException("Tutorials Course with course id " + command.courseId() + " in the date " + command.date() +
                     " and hour " + command.hour() + " already exists");
         }
         var newTutorialsCourses = new TutorialsCourses(command);
