@@ -79,6 +79,8 @@ public class ExamController {
         return ResponseEntity.ok(examResource);
     }
 
+
+
     @GetMapping
     @Operation(summary = "Get all exams", description = "Get all exams")
     @ApiResponses(value = {
