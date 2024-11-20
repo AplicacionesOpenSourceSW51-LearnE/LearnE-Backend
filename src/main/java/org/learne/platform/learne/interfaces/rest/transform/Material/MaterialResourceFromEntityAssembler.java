@@ -6,7 +6,7 @@ import org.learne.platform.learne.interfaces.rest.resources.Material.MaterialRes
 public class MaterialResourceFromEntityAssembler {
     public static MaterialResource ToResourceFromEntity(Material entity) {
         return new MaterialResource(entity.getId(),entity.getCourse().getId(),
-                entity.getTitle(),entity.getLink(),entity.getFormat());
+                entity.getTitle(),entity.getFormat(),entity.getLink());
 
     }
 }
