@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.learne.platform.learne.domain.model.commands.Material.DeleteMaterialCommand;
 import org.learne.platform.learne.domain.model.queries.Exam.GetAllExamsQuery;
 import org.learne.platform.learne.domain.model.queries.Exam.GetExamByIdQuery;
 import org.learne.platform.learne.domain.model.queries.Material.GetAllMaterialQuery;
@@ -103,7 +104,18 @@ public class MaterialController {
                 .toList();
         return ResponseEntity.ok(materialResources);
     }
-
-
-
+    @DeleteMapping("/{materialId}")
+    @Operation(
+            summary = "Delete a Material",
+            description = "Deletes a Material using the material ID"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Material Deleted Successfully "),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+    })
+    public ResponseEntity<?> deleteMaterial(@PathVariable Long materialId) {
+        var deleteMaterialCommand = new DeleteMaterialCommand(materialId);
+        materialCommandService.handle(deleteMaterialCommand);
+        return ResponseEntity.noContent().build();
+    }
 }

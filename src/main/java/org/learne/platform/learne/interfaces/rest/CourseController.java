@@ -39,7 +39,7 @@ public class CourseController {
             description = "Searches for all created courses on the platform"
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "All Courses found"),
+            @ApiResponse(responseCode = "200", description = "All Courses found"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
     @GetMapping
@@ -56,7 +56,7 @@ public class CourseController {
             description = "Searches for a specific course using their title"
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Course found"),
+            @ApiResponse(responseCode = "200", description = "Course found"),
             @ApiResponse(responseCode = "400", description = "Bad request"),
     })
     @GetMapping("/{id}")

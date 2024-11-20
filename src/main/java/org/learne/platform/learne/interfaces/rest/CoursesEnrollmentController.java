@@ -37,7 +37,7 @@ public class CoursesEnrollmentController {
             description = "Searches for all created courses enrollment on the platform"
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "All Courses enrollment found"),
+            @ApiResponse(responseCode = "200", description = "All Courses enrollment found"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
     private ResponseEntity<List<CoursesEnrollmentResource>> getAllCourses() {

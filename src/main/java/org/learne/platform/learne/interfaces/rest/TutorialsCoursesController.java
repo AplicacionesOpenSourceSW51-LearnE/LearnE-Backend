@@ -80,7 +80,7 @@ public class TutorialsCoursesController {
     @PutMapping("/{id}")
     @Operation(summary = "Update Tutorial Course", description = "Update tutorial course")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Tutorial Course updated"),
+            @ApiResponse(responseCode = "200", description = "Tutorial Course updated"),
             @ApiResponse(responseCode = "400", description = "Bad request")
     })
     public ResponseEntity<TutorialsCoursesResource> updateTutorialCourse(@PathVariable Long id,
@@ -99,7 +99,7 @@ public class TutorialsCoursesController {
             description = "Searches for a specific tutorial course using their title"
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Course found"),
+            @ApiResponse(responseCode = "200", description = "Course found"),
             @ApiResponse(responseCode = "400", description = "Bad request"),
     })
     @GetMapping("/{id}")

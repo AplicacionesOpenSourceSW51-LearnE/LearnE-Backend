@@ -2,9 +2,12 @@ package org.learne.platform.learne.application.internal.commandservices;
 
 import org.learne.platform.learne.domain.model.aggregates.Material;
 import org.learne.platform.learne.domain.model.commands.Material.CreateMaterialCommand;
+import org.learne.platform.learne.domain.model.commands.Material.DeleteMaterialCommand;
 import org.learne.platform.learne.domain.services.Material.MaterialCommandService;
 import org.learne.platform.learne.infrastructure.persistence.jpa.MaterialRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class MaterialCommandServiceImpl implements MaterialCommandService {
@@ -15,6 +18,17 @@ public class MaterialCommandServiceImpl implements MaterialCommandService {
         this.materialRepository = materialRepository;
     }
 
+    @Override
+    public void handle(DeleteMaterialCommand command) {
+        if (!materialRepository.existsById(command.id())) {
+            throw new IllegalArgumentException("Material with id " + command.id() + " does not exist");
+        }
+        try {
+            materialRepository.deleteById(command.id());
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException("An error occurred while deleting material" + e.getMessage());
+        }
+    }
 
     @Override
     public Long handle(CreateMaterialCommand command) {

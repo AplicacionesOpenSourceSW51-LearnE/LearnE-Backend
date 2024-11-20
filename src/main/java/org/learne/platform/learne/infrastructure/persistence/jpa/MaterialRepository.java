@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface MaterialRepository extends JpaRepository<Material, Long> {
 
     Optional<Material> findById(Long id);
-
+    boolean existsById(Long id);
     boolean existsByCourseIdAndTitle(Long id, String title);
 }
