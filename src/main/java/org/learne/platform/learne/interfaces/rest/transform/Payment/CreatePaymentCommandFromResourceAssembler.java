@@ -5,17 +5,13 @@ import org.learne.platform.learne.interfaces.rest.resources.Payment.CreatePaymen
 
 public class CreatePaymentCommandFromResourceAssembler {
     public static CreatePaymentCommand toCommandFromResource(CreatePaymentResource resource) {
-        var studentId = Long.parseLong(resource.studentId());
-        var numberCard = Long.parseLong(resource.numberCard());
-        var securityCode = Integer.parseInt(resource.securityCode());
-
         return new CreatePaymentCommand(
-                studentId,
-                resource.nameCard(),
-                numberCard,
-                resource.expireDate(),
-                securityCode,
-                resource.emailAddress()
+                resource.name_card(),
+                resource.number_card(),
+                resource.expire_date(),
+                resource.security_code(),
+                resource.email(),
+                resource.student_id()
         );
     }
 }

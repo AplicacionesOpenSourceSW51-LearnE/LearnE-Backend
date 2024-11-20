@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
-    boolean existsPaymentByStudentId(Long studentId);
+    boolean existsPaymentByUserId(Long studentId);
 }

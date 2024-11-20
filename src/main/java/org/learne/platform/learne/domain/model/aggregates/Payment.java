@@ -2,6 +2,7 @@ package org.learne.platform.learne.domain.model.aggregates;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.learne.platform.auth.domain.model.aggregates.User;
 import org.learne.platform.learne.domain.model.commands.CreatePaymentCommand;
 import org.learne.platform.learne.domain.model.valueobjects.EmailAddress;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
@@ -9,9 +10,6 @@ import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggre
 @Entity
 @Getter
 public class Payment extends AuditableAbstractAggregateRoot<Payment> {
-
-    @Column(nullable = false)
-    private Long studentId;
 
     @Column(nullable = false)
     private String nameCard;
@@ -27,18 +25,22 @@ public class Payment extends AuditableAbstractAggregateRoot<Payment> {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "address", column = @Column(name = "email_address"))
+            @AttributeOverride(name = "address", column = @Column(name = "email"))
     })
     private EmailAddress emailAddress;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private User user;
 
     public Payment() {}
 
     public Payment(CreatePaymentCommand command) {
-        this.studentId = command.studentId();
         this.nameCard = command.nameCard();
         this.numberCard = command.numberCard();
         this.expireDate = command.expireDate();
         this.securityCode = command.securityCode();
         this.emailAddress = new EmailAddress(command.emailAddress());
+        this.user = new User(command.studentId());
     }
 }

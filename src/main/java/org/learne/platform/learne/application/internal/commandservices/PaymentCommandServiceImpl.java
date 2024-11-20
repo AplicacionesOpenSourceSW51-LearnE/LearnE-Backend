@@ -20,7 +20,7 @@ public class PaymentCommandServiceImpl implements PaymentCommandService {
 
     @Override
     public Optional<Payment> handle(CreatePaymentCommand command) {
-        if (paymentRepository.existsPaymentByStudentId(command.studentId())){
+        if (paymentRepository.existsPaymentByUserId(command.studentId())){
             throw new IllegalArgumentException("Payment for student already exists");
         }
         var payment = new Payment(command);

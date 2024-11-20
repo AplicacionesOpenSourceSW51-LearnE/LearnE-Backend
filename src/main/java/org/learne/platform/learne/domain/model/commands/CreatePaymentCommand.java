@@ -1,6 +1,6 @@
 package org.learne.platform.learne.domain.model.commands;
 
-public record CreatePaymentCommand(Long studentId, String nameCard, Long numberCard, String expireDate, Integer securityCode, String emailAddress) {
+public record CreatePaymentCommand(String nameCard, Long numberCard, String expireDate, Integer securityCode, String emailAddress, Long studentId) {
     public CreatePaymentCommand{
         if (studentId == null || studentId <= 0){
             throw new IllegalArgumentException("Student ID invalid");
