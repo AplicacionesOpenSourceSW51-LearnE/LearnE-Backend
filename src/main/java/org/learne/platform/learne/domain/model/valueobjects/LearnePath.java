@@ -41,7 +41,9 @@ public class LearnePath {
      * @return The first learned path item where the id is equal to the given id
      */
     private LearnePathItem getLearningPathItemWithId(Long itemId){
-        return this.getFirstLearnePathItemWhere(item -> item.getId().equals(itemId));
+//        return this.getFirstLearnePathItemWhere(item -> item.getId().equals(itemId));
+        return null;
+
     }
 
     private LearnePathItem getLearnePathItemWithTeacherId(TeacherId teacherId){
