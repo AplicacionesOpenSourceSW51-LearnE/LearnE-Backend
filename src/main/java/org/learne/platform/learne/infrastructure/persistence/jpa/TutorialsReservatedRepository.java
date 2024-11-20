@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface TutorialsReservatedRepository extends JpaRepository<TutorialsReservated,Long> {
-    Optional<TutorialsReservated> findById(Long id);
+    boolean existsByUserIdAndTutorialsCoursesId(Long studentId, Long tutorialsId);
 }

@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.learne.platform.learne.domain.model.aggregates.Course;
 import org.learne.platform.learne.domain.model.queries.GetAllCoursesQuery;
-import org.learne.platform.learne.domain.model.queries.GetCourseByTitleQuery;
+import org.learne.platform.learne.domain.model.queries.GetCourseByIdQuery;
 import org.learne.platform.learne.domain.services.Course.CourseCommandService;
 import org.learne.platform.learne.domain.services.Course.CourseQueryService;
 import org.learne.platform.learne.interfaces.rest.resources.Course.CourseResource;
@@ -42,7 +42,7 @@ public class CourseController {
             @ApiResponse(responseCode = "201", description = "All Courses found"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
-    @GetMapping("/getAllCourses")
+    @GetMapping
     private ResponseEntity<List<CourseResource>> getAllCourses() {
         var getAllCourses = new GetAllCoursesQuery();
         var courses = courseQueryService.handle(getAllCourses);
@@ -59,11 +59,16 @@ public class CourseController {
             @ApiResponse(responseCode = "201", description = "Course found"),
             @ApiResponse(responseCode = "400", description = "Bad request"),
     })
-    @GetMapping("/getCourseByIdQuery/{title}")
-    public ResponseEntity<CourseResource> getCourseById(@PathVariable("title") String title) {
-        Optional<Course> course = courseQueryService.handle(new GetCourseByTitleQuery(title));
-        return course.map(source -> ResponseEntity.ok(CourseResourceFromEntityAssembler.toResourceFromEntity(source)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/{id}")
+    public ResponseEntity<CourseResource> getCourseById(@PathVariable Long id) {
+        var getCourseByIdQuery = new GetCourseByIdQuery(id);
+        var course = courseQueryService.handle(getCourseByIdQuery);
+        if (course.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        var courseEntity = course.get();
+        var courseResource = CourseResourceFromEntityAssembler.toResourceFromEntity(courseEntity);
+        return ResponseEntity.ok(courseResource);
     }
 
     @Operation(
@@ -74,7 +79,7 @@ public class CourseController {
             @ApiResponse(responseCode = "201", description = "Course created"),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
-    @PostMapping("/createCourse")
+    @PostMapping
     public ResponseEntity<CourseResource> createCourse(@RequestBody CreateCourseResource resource){
         Optional<Course> course = courseCommandService
                 .handle(CreateCourseCommandFromResourceAssembler.toCommand(resource));

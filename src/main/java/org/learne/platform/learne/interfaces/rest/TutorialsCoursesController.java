@@ -5,13 +5,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.learne.platform.learne.domain.model.aggregates.TutorialsCourses;
+import org.learne.platform.learne.domain.model.queries.GetCourseByIdQuery;
 import org.learne.platform.learne.domain.model.queries.TutorialsCourses.GetAllTutorialsCoursesQuery;
 import org.learne.platform.learne.domain.model.queries.TutorialsCourses.GetTutorialsCoursesByIdQuery;
 import org.learne.platform.learne.domain.services.TutorialsCourses.TutorialsCoursesCommandService;
 import org.learne.platform.learne.domain.services.TutorialsCourses.TutorialsCoursesQueryService;
+import org.learne.platform.learne.interfaces.rest.resources.Course.CourseResource;
 import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.CreateTutorialsCoursesResource;
 import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.TutorialsCoursesResource;
 import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.UpdateTutorialsCoursesResource;
+import org.learne.platform.learne.interfaces.rest.transform.Course.CourseResourceFromEntityAssembler;
 import org.learne.platform.learne.interfaces.rest.transform.TutorialsCourses.CreateTutorialsCoursesCommandFromResourceAssembler;
 import org.learne.platform.learne.interfaces.rest.transform.TutorialsCourses.TutorialsCoursesResourceFromEntityAssembler;
 import org.learne.platform.learne.interfaces.rest.transform.TutorialsCourses.UpdateTutorialsCoursesCommandFromResourceAssembler;
@@ -90,5 +93,24 @@ public class TutorialsCoursesController {
         var updatedTutorialsCourseEntity = updateTutorialsCourse.get();
         var updatedTutorialsCourseResource = TutorialsCoursesResourceFromEntityAssembler.toResourceFromEntity(updatedTutorialsCourseEntity);
         return ResponseEntity.ok(updatedTutorialsCourseResource);
+    }
+    @Operation(
+            summary = "Search for a specific tutorial course",
+            description = "Searches for a specific tutorial course using their title"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Course found"),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<TutorialsCoursesResource> getTutorialsCourseById(@PathVariable Long id) {
+        var getTutorialsCourseByIdQuery = new GetTutorialsCoursesByIdQuery(id);
+        var tutorialsCourse = tutorialsCoursesQueryService.handle(getTutorialsCourseByIdQuery);
+        if (tutorialsCourse.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        var tutorialsCourseEntity = tutorialsCourse.get();
+        var tutorialsCourseResource = TutorialsCoursesResourceFromEntityAssembler.toResourceFromEntity(tutorialsCourseEntity);
+        return ResponseEntity.ok(tutorialsCourseResource);
     }
 }

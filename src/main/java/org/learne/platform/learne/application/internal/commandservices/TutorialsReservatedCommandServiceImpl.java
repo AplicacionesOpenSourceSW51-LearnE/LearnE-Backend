@@ -6,6 +6,8 @@ import org.learne.platform.learne.domain.services.TutorialsReservated.TutorialsR
 import org.learne.platform.learne.infrastructure.persistence.jpa.TutorialsReservatedRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class TutorialsReservatedCommandServiceImpl implements TutorialsReservatedCommandService {
     private final TutorialsReservatedRepository tutorialsReservatedRepository;
@@ -14,13 +16,12 @@ public class TutorialsReservatedCommandServiceImpl implements TutorialsReservate
     }
 
     @Override
-    public Long handle(CreateTutorialsReservatedCommand command) {
-        var newTutorialsReservated = new TutorialsReservated(command);
-        try {
-            tutorialsReservatedRepository.save(newTutorialsReservated);
-        } catch (RuntimeException e) {
-            throw new IllegalArgumentException("An error occurred while saving the tutorials reservated " + e.getMessage());
+    public Optional<TutorialsReservated> handle(CreateTutorialsReservatedCommand command) {
+        if (tutorialsReservatedRepository.existsByUserIdAndTutorialsCoursesId(command.studentId(), command.tutorialId())) {
+            throw new IllegalArgumentException("Student Id and Tutorial Id already exists");
         }
-        return newTutorialsReservated.getId();
+        var tutorialsReservated = new TutorialsReservated(command);
+        var createTutorialsReservated = tutorialsReservatedRepository.save(tutorialsReservated);
+        return Optional.of(createTutorialsReservated);
     }
 }

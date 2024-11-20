@@ -1,10 +1,7 @@
 package org.learne.platform.learne.domain.model.commands;
 
-import org.learne.platform.learne.domain.model.valueobjects.TeacherId;
-
-public record CreatedCourseCommand(String title, String description,
-                                   TeacherId teacherId, String duration, String prior_knowledge, String principal_image, String level,
-                                   org.learne.platform.learne.domain.model.valueobjects.StatusCourse status) {
+public record CreatedCourseCommand(String title, String description, Long teacherId, String level, String duration,
+                                   String prior_knowledge, String principal_image, String url_video) {
     public CreatedCourseCommand {
 
         if (title == null || title.isBlank()) {
@@ -25,8 +22,11 @@ public record CreatedCourseCommand(String title, String description,
         if (principal_image == null || principal_image.isBlank()) {
             throw new IllegalArgumentException("Principal image cannot be blank");
         }
-        if(teacherId == null) {
+        if(teacherId == null || teacherId <= 0) {
             throw new IllegalArgumentException("TeacherId cannot be null");
+        }
+        if (url_video == null || url_video.isBlank()) {
+            throw new IllegalArgumentException("Url cannot be blank");
         }
     }
 }

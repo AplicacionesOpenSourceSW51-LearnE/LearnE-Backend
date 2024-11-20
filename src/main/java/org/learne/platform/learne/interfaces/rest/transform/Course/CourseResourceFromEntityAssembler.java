@@ -5,6 +5,8 @@ import org.learne.platform.learne.interfaces.rest.resources.Course.CourseResourc
 
 public class CourseResourceFromEntityAssembler {
     public static CourseResource toResourceFromEntity(Course entity) {
-        return new CourseResource(entity.getId(), entity.getTitle(), entity.getDescription(), entity.getTeacherId(), entity.getLevel(), entity.getDuration(), entity.getPrior_knowledge(), entity.getPrincipal_image().toString());
+        return new CourseResource(entity.getId(), entity.getTitle(), entity.getDescription(),
+                entity.getUser().getId(), entity.getLevel(), entity.getDuration(), entity.getPrior_knowledge(),
+                entity.getPrincipal_image(), entity.getUrl_video());
     }
 }

@@ -5,21 +5,20 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.learne.platform.learne.domain.model.aggregates.TutorialsReservated;
-import org.learne.platform.learne.domain.model.commands.CreateTutorialsReservatedCommand;
 import org.learne.platform.learne.domain.model.queries.TutorialsReservated.GetAllTutorialsReservatedQuery;
-import org.learne.platform.learne.domain.model.queries.TutorialsReservated.GetTutorialsReservatedByIdQuery;
 import org.learne.platform.learne.domain.services.TutorialsReservated.TutorialsReservatedCommandService;
 import org.learne.platform.learne.domain.services.TutorialsReservated.TutorialsReservatedQueryService;
 import org.learne.platform.learne.interfaces.rest.resources.TutorialsReservated.CreateTutorialsReservatedResource;
 import org.learne.platform.learne.interfaces.rest.resources.TutorialsReservated.TutorialsReservatedResource;
 import org.learne.platform.learne.interfaces.rest.transform.TutorialsReservated.CreateTutorialsReservatedCommandFromResourceAssembler;
 import org.learne.platform.learne.interfaces.rest.transform.TutorialsReservated.TutorialsReservatedResourceFromEntityAssembler;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -40,20 +39,11 @@ public class TutorialsReservatedController {
             @ApiResponse(responseCode = "400", description = "Bad request"),
             @ApiResponse(responseCode = "404", description = "Tutorials Reservated not found")
     })
-    public ResponseEntity<TutorialsReservatedResource> createTutorialsReservated(@RequestBody CreateTutorialsReservatedResource resource) {
-        var createTutorialsReservatedCommand = CreateTutorialsReservatedCommandFromResourceAssembler.toCommand(resource);
-        var tutorialsReservatedId = tutorialsReservatedCommandService.handle(createTutorialsReservatedCommand);
-        if (tutorialsReservatedId == null || tutorialsReservatedId <= 0L) {
-            return ResponseEntity.badRequest().build();
-        }
-        var getTutorialsReservatedById = new GetTutorialsReservatedByIdQuery(tutorialsReservatedId);
-        var tutorialsReservated = tutorialsReservatedQueryService.handle(getTutorialsReservatedById);
-        if (tutorialsReservated.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        var tutorialsReservatedEntity = tutorialsReservated.get();
-        var tutorialsReservatedResource = TutorialsReservatedResourceFromEntityAssembler.toResourceFromEntity(tutorialsReservatedEntity);
-        return new ResponseEntity<>(tutorialsReservatedResource, HttpStatus.CREATED);
+    public ResponseEntity<TutorialsReservatedResource> createTutorialsReservated(@RequestBody CreateTutorialsReservatedResource resource){
+        Optional<TutorialsReservated> tutorialsReservated = tutorialsReservatedCommandService
+                .handle(CreateTutorialsReservatedCommandFromResourceAssembler.toCommand(resource));
+        return tutorialsReservated.map(source -> new ResponseEntity<>(TutorialsReservatedResourceFromEntityAssembler.toResourceFromEntity(source), CREATED))
+                .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
     @GetMapping
