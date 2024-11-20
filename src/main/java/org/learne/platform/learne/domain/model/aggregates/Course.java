@@ -3,7 +3,7 @@ package org.learne.platform.learne.domain.model.aggregates;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import org.learne.platform.auth.domain.model.aggregates.User;
+import org.learne.platform.iam.domain.model.aggregates.User;
 import org.learne.platform.learne.domain.model.commands.CreatedCourseCommand;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

@@ -5,7 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
-import org.learne.platform.auth.domain.model.aggregates.User;
+import org.learne.platform.iam.domain.model.aggregates.User;
 import org.learne.platform.learne.domain.model.commands.CreateTutorialsReservatedCommand;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 

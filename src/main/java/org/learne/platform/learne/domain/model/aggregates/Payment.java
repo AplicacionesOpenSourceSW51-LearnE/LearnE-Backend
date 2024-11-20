@@ -2,7 +2,7 @@ package org.learne.platform.learne.domain.model.aggregates;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.learne.platform.auth.domain.model.aggregates.User;
+import org.learne.platform.iam.domain.model.aggregates.User;
 import org.learne.platform.learne.domain.model.commands.CreatePaymentCommand;
 import org.learne.platform.learne.domain.model.valueobjects.EmailAddress;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
