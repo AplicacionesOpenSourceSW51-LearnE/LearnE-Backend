@@ -3,7 +3,6 @@ package org.learne.platform.learne.application.internal.queryservices;
 import org.learne.platform.learne.domain.model.aggregates.Course;
 import org.learne.platform.learne.domain.model.queries.GetAllCoursesQuery;
 import org.learne.platform.learne.domain.model.queries.GetCourseByIdQuery;
-import org.learne.platform.learne.domain.model.queries.GetLearnePathItemByCourseIdAndTeacherIdQuery;
 import org.learne.platform.learne.domain.services.Course.CourseQueryService;
 import org.learne.platform.learne.infrastructure.persistence.jpa.CourseRepository;
 import org.springframework.stereotype.Service;

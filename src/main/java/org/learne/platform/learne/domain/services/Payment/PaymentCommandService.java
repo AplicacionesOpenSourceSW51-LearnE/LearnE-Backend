@@ -9,6 +9,4 @@ import java.util.Optional;
 
 public interface PaymentCommandService {
     Optional<Payment> handle(CreatePaymentCommand command);
-    Optional<Payment> handle(UpdatePaymentCommand command);
-    void handle(DeletePaymentCommand command);
 }

@@ -27,31 +27,4 @@ public class PaymentCommandServiceImpl implements PaymentCommandService {
         paymentRepository.save(payment);
         return Optional.of(payment);
     }
-
-    @Override
-    public Optional<Payment> handle(UpdatePaymentCommand command) {
-        var result = paymentRepository.findPaymentById(command.paymentId());
-        if (result.isEmpty()) {
-            throw new IllegalArgumentException("Payment with id " + command.paymentId() + " not found");
-        }
-        var paymentToUpdate = result.get();
-        try {
-            var updatePayment = paymentRepository.save(paymentToUpdate.updateInformation(command.studentId(), command.nameCard(), command.numberCard(), command.expireDate(), command.securityCode(), command.emailAddress()));
-            return Optional.of(updatePayment);
-        } catch (Exception e){
-            throw new IllegalArgumentException("An error occurred while updating payment information. " + e.getMessage());
-        }
-    }
-
-    @Override
-    public void handle(DeletePaymentCommand command) {
-        if(!paymentRepository.existsPaymentById(command.paymentId())) {
-            throw new IllegalArgumentException("Payment with id " + command.paymentId() + " not found");
-        }
-        try {
-            paymentRepository.deleteById(command.paymentId());
-        } catch (Exception e) {
-            throw new IllegalArgumentException("An error occurred while deleting payment information. " + e.getMessage());
-        }
-    }
 }
