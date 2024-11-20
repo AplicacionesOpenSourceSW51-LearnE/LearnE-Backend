@@ -2,7 +2,7 @@ package org.learne.platform.learne.domain.model.aggregates;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.learne.platform.auth.domain.model.aggregates.User;
+import org.learne.platform.profile.domain.model.aggregates.User;
 import org.learne.platform.learne.domain.model.commands.TutorialsCourses.CreateTutorialsCoursesCommand;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
@@ -47,6 +47,8 @@ public class TutorialsCourses extends AuditableAbstractAggregateRoot<TutorialsCo
         this.user = new User(command.teacherId());
         this.date = command.date();
         this.hour = command.hour();
+        this.isReservated = command.isReservated();
+        this.link = command.link();
     }
 
     public TutorialsCourses(Long id) {this.setId(id);}

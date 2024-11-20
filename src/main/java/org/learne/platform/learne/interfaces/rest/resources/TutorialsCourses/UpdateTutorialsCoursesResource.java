@@ -1,9 +1,9 @@
 package org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses;
 
-public record UpdateTutorialsCoursesResource(Long course_id, Long teacher_id, String date, String hour,
+public record UpdateTutorialsCoursesResource(Long courses_id, Long teacher_id, String date, String hour,
                                              Boolean is_reservated, String link) {
     public UpdateTutorialsCoursesResource {
-        if (course_id == null || course_id <= 0L) {
+        if (courses_id == null || courses_id <= 0L) {
             throw new IllegalArgumentException("courseId cannot be null");
         }
         if (teacher_id == null || teacher_id <= 0L) {

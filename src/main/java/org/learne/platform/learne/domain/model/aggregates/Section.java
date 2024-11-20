@@ -16,10 +16,8 @@ public class Section extends AuditableAbstractAggregateRoot<Section> {
     @JoinColumn(name = "unit_id", nullable = false)
     private Unit unit;
     @Column(nullable = false)
-    @Size(max = 50)
     private String title;
     @Column(nullable = false)
-    @Size(max = 250)
     private String description;
     @Column(nullable = false)
     private String url_video;

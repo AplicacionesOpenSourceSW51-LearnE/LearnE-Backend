@@ -6,7 +6,7 @@ import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.Upd
 public class UpdateTutorialsCoursesCommandFromResourceAssembler {
     public static UpdateTutorialsCoursesCommand toCommandFromResource(Long tutorialsCoursesId,
                                                                       UpdateTutorialsCoursesResource resource) {
-        return new UpdateTutorialsCoursesCommand(tutorialsCoursesId, resource.course_id(),
+        return new UpdateTutorialsCoursesCommand(tutorialsCoursesId, resource.courses_id(),
                 resource.teacher_id(), resource.date(), resource.hour(), resource.is_reservated(),
                 resource.link());
     }

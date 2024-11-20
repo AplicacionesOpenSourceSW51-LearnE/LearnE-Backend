@@ -2,7 +2,7 @@ package org.learne.platform.learne.domain.model.aggregates;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.learne.platform.auth.domain.model.aggregates.User;
+import org.learne.platform.profile.domain.model.aggregates.User;
 import org.learne.platform.learne.domain.model.commands.Note.CreateNotesCommand;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
@@ -14,13 +14,10 @@ public class Notes extends AuditableAbstractAggregateRoot<Notes> {
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
     private User studentId;
-    /**
-     * //aca dudo
-     */
+
     @ManyToOne
     @JoinColumn(name = "exam_id", nullable = false)
     private Exam examId;
-
 
     @Column(nullable = false)
     private Float note;

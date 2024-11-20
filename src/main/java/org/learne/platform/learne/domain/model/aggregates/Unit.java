@@ -17,7 +17,6 @@ public class Unit extends AuditableAbstractAggregateRoot<Unit> {
     @JoinColumn(name = "course_id", nullable = false)
     private Course courses;
     @Column(nullable = false)
-    @Size(max = 50)
     private String title;
 
     public Unit() {}

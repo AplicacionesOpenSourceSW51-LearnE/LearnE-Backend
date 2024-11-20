@@ -5,7 +5,7 @@ import org.learne.platform.learne.interfaces.rest.resources.TutorialsCourses.Cre
 
 public class CreateTutorialsCoursesCommandFromResourceAssembler {
     public static CreateTutorialsCoursesCommand toCommand(CreateTutorialsCoursesResource resource) {
-        return new CreateTutorialsCoursesCommand(resource.course_id(), resource.teacher_id(),
+        return new CreateTutorialsCoursesCommand(resource.courses_id(), resource.teacher_id(),
                 resource.date(), resource.hour(), resource.is_reservated(), resource.link());
     }
 }

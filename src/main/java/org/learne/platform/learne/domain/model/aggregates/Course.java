@@ -3,7 +3,7 @@ package org.learne.platform.learne.domain.model.aggregates;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import org.learne.platform.auth.domain.model.aggregates.User;
+import org.learne.platform.profile.domain.model.aggregates.User;
 import org.learne.platform.learne.domain.model.commands.CreatedCourseCommand;
 import org.learne.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,11 +13,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Course extends AuditableAbstractAggregateRoot<Course> {
     @Column(nullable = false)
-    @Size(max = 50)
     private String title;
 
     @Column(nullable = false)
-    @Size(max = 50)
     private String description;
 
     @ManyToOne
@@ -33,15 +31,12 @@ public class Course extends AuditableAbstractAggregateRoot<Course> {
     private String duration;
 
     @Column(nullable = false)
-    @Size(max = 50)
     private String prior_knowledge;
 
     @Column(nullable = false)
-    @Size(max = 50)
     private String principal_image;
 
     @Column(nullable = false)
-    @Size(max = 50)
     private String url_video;
 
 
